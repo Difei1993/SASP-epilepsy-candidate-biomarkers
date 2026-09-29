@@ -16,8 +16,9 @@ Run from the repository root:
 1. `scripts/00_config.R`
 2. `scripts/01_prepare_GSE190451.R`
 3. `scripts/02_candidate_validation_GSE190451.R`
-4. `scripts/03_clinical_association_GSE256068.R`
-5. `scripts/99_session_info.R`
+4. `scripts/03_prepare_GSE256068_metadata.R`
+5. `scripts/04_clinical_association_GSE256068.R`
+6. `scripts/99_session_info.R`
 
 The original feature-prioritization workflow produced five genes for cross-dataset assessment: **SERPINE1, CCL2, IGFBP4, C3, and SPX**. The GSE190451 script evaluates these genes without hard-coding the final supported set.
 
