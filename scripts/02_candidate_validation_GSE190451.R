@@ -2,8 +2,9 @@
 # Cross-dataset assessment of the five feature-prioritized candidate genes.
 #
 # GSE190451 contains 3 TLE and 3 non-epileptic control samples and provides TPM.
-# We use limma moderated linear modeling on log2(TPM + 1), and report both
-# nominal and BH-adjusted p values.
+# We use limma moderated linear modeling on log2(TPM + 1). The model is fitted
+# genome-wide so empirical-Bayes variance moderation is informed by all genes;
+# the five prespecified candidate genes are extracted only after model fitting.
 
 source("scripts/00_config.R")
 
@@ -30,20 +31,22 @@ if (length(missing) > 0L) {
        paste(missing, collapse = ", "))
 }
 
-candidate_expr <- expr[INITIAL_CANDIDATES, , drop = FALSE]
-
 design <- model.matrix(~ 0 + group)
 colnames(design) <- levels(group)
 contrast <- limma::makeContrasts(EP - control, levels = design)
 
-fit <- limma::lmFit(candidate_expr, design)
+# Fit all genes, then extract the five prespecified candidates.
+fit <- limma::lmFit(expr, design)
 fit <- limma::contrasts.fit(fit, contrast)
 fit <- limma::eBayes(fit, trend = TRUE)
 
-tab <- limma::topTable(fit, number = Inf, sort.by = "none")
-tab$gene <- rownames(tab)
+all_tab <- limma::topTable(fit, number = Inf, sort.by = "none")
+all_tab$gene <- rownames(all_tab)
+
+tab <- all_tab[match(INITIAL_CANDIDATES, all_tab$gene), , drop = FALSE]
 rownames(tab) <- NULL
 
+candidate_expr <- expr[INITIAL_CANDIDATES, , drop = FALSE]
 ep_median <- apply(
   candidate_expr[, group == "EP", drop = FALSE],
   1, median, na.rm = TRUE
