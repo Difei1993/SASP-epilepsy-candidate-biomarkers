@@ -1,0 +1,11 @@
+# Reproducibility publication update on 12 November 2026
+
+This non-destructive update distinguishes the final manuscript's raw-count DESeq2 comparison from the repository's older TPM/limma-trend workflow. It publishes already verified materials without rerunning analyses, changing significance thresholds, selecting genes, or replacing the frozen manuscript figures.
+
+- Figure 2e: `scripts/GSE190451_DESEQ2_REPRODUCIBLE.R`, identical to Supplementary Code 1; raw integer counts, `~ Type`, control reference, three samples per group and Benjamini-Hochberg adjustment. Figure stars represent nominal P values, not genome-wide FDR significance.
+- Five-gene verification: `docs/GSE190451_FIVE_GENE_VERIFIED_RESULTS.csv` preserves independent reproduction values and separately prefixed `historical_*` values. Exact historical numerical reproduction was not achieved; expression directions and nominal/BH significance calls agree. CCL2 remains a historical assessed candidate and is not part of the final four-gene panel. SPX does not meet BH-adjusted P < 0.05 in this six-sample comparison.
+- Runtime: `docs/GSE190451_R_sessionInfo.txt` is the archived verification environment, not a claim that the original complete historical environment was recovered. The count/group inputs are supplied in the manuscript's Supplementary Code 1, not newly redistributed by this repository.
+- GSE256068 and Figure 3: the archived script includes the verified 133-sample reconstruction and four-gene exploratory internal model. The archived figure matches the final figure pixel for pixel. The code was published without re-executing the model or regenerating a figure.
+- History retained: `scripts/01_prepare_GSE190451.R`, `scripts/02_candidate_validation_GSE190451.R`, the general GSE256068 helpers, and `legacy_original_scripts/` remain unchanged. The older TPM/limma-trend scripts are a separate historical or supplementary analysis, not the statistical source of Figure 2e. The older clinical helper is not an exact reproduction of the corrected Supplementary Figure 1.
+
+No unpublished patient-level data, credentials or machine-specific account paths are included in the added materials. See the individual README files for source availability, input requirements and remaining historical provenance limits.

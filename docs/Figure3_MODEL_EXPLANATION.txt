@@ -1,0 +1,17 @@
+Figure 3 CODE-VERIFIED model specification
+
+Data: GSE256068 NCBI-generated TPM matrix; verified 133-sample analysis cohort.
+Outcome: EP = 1; ControlCortex = 0.
+Predictors: SERPINE1, IGFBP4, C3, SPX.
+Model: logistic regression; all panels use inverse-logit EP probability.
+Calibration: apparent and bootstrap bias-corrected curves (B = 1,000).
+DCA: same four-gene model; correctly labeled single-gene comparators; treat-all and treat-none.
+Apparent metrics: AUC = 0.99449036; Brier score = 0.01566.
+
+Interpretation: training-cohort/internal assessment only. The 121:12 class imbalance and numerically
+extreme fitted probabilities imply optimism and possible separation. The figure does not establish
+external calibration or clinical utility.
+
+The previous Hosmer-Lemeshow annotation was not retained because the archived r.05_nomogram.r code
+passed the lrm linear predictor rather than a probability to the test. The historical DCA curve-name
+order was also inconsistent with the model order; the rebuilt curves are explicitly mapped.
